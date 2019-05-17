@@ -1,0 +1,40 @@
+{
+  "name": "geeko-youtube-music",
+  "version": "1.0.2",
+  "description": "Geeko Youtube Music",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "pack": "npx electron-builder --dir",
+    "dist": "npx electron-builder",
+    "publish:win": "build --win -p always --config electron-builder.yml",
+    "publish:mac": "build --mac -p always --config electron-builder.yml",
+    "publish:lin": "build --linux -p always --config electron-builder.yml"
+  },
+  "repository": "https://github.com/xxgicoxx/geekomusic",
+  "keywords": [
+    "Electron",
+    "Youtube",
+    "Music"
+  ],
+  "author": "Giovani de Oliveira <giovanioliveira@outlook.com.br>",
+  "license": "CC0-1.0",
+  "devDependencies": {
+    "electron": "^5.0.1",
+    "electron-builder": "^20.39.0"
+  },
+  "dependencies": {
+    "custom-electron-titlebar": "^3.0.8",
+    "discord-rpc": "^3.0.1",
+    "electron-canvas-to-buffer": "^2.0.0",
+    "electron-google-analytics": "^0.1.0",
+    "electron-is-dev": "^1.0.1",
+    "electron-localshortcut": "^3.1.0",
+    "electron-store": "^2.0.0",
+    "i18n": "^0.8.3",
+    "materialize-css": "^1.0.0",
+    "npx": "^10.2.0",
+    "register-scheme": "0.0.2",
+    "request": "^2.88.0"
+  }
+}

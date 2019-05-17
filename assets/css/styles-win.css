@@ -1,0 +1,92 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+    user-select: none;
+    color: #AAA;
+}
+
+td.item{
+    text-align: center;
+}
+
+.bar {
+    width: 100%;
+    height: 20px;
+    background-color: #232323;
+    position: absolute;
+    top: 0px;
+    color: #AAA;
+}
+
+.draggable-bar {
+    width: 100%;
+    height: 20px;
+    margin-left: 120px;
+    background-color: #AAA !important;
+    position: absolute;
+    top: 0px;
+    color: #AAA;
+}
+
+.drag {
+    -webkit-app-region:drag;
+}
+
+.no-drag {
+    -webkit-app-region: no-drag
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.title {
+    text-align: center;
+    vertical-align: middle;
+    color: #AAA;
+    font-weight: lighter;
+    font-size: 14px;
+}
+
+.hide {
+    display: none;
+}
+
+.hover-red:hover {
+    background: red;
+}
+
+.shortcut-or {
+    color: #ddd;
+}
+
+input {
+    color: #FFF;
+}
+
+#lyric {
+    font-size: 130%;
+    text-align: center;
+}
+
+#div_search_lyric {
+    margin-top: 20%;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #232323;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #f44336;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}

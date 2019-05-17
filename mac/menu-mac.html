@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <link type="text/css" rel="stylesheet" href="../assets/css/material_icons.css">
+    <link type="text/css" rel="stylesheet" href="../assets/css/styles-mac.css" />
+    <link type="text/css" rel="stylesheet" href="../node_modules/materialize-css/dist/css/materialize.min.css"  media="screen,projection"/>
+  </head>
+  <body>
+    <div id="content" style="text-align: center">
+      <div id="general" class="col s12">
+        <div class="row">
+          <div class="col s12">
+            <table class="table">
+              <tbody>
+                <tr>
+                  <td class="item">
+                      <span style="margin: auto">Geeko</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="btn" id="btn-play-pause"  style="width: 100%">
+                    <span id="i18n_LABEL_POPUPMENU_PLAY"></span>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="btn" id="btn-previous"  style="width: 100%;">
+                    <span id="i18n_LABEL_POPUPMENU_PREVIOUS"></span>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="btn" id="btn-next" style="width: 100%;">
+                    <span id="i18n_LABEL_POPUPMENU_NEXT"></span>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="btn" id="btn-show-lyric"  style="width: 100%;">
+                    <span id="i18n_LABEL_POPUPMENU_LYRICS"></span>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="btn" id="btn-exit" style="width: 100%;">
+                    <span id="i18n_LABEL_POPUPMENU_EXIT"></span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="../node_modules/materialize-css/dist/js/materialize.min.js"></script>
+    <script>
+        require('../renderer_menu.js')
+    </script>
+  </body>
+</html>
