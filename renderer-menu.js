@@ -1,5 +1,5 @@
 const { remote, ipcRenderer: ipc } = require('electron');
-const __ = require('./translateProvider');
+const __ = require('./translate-provider');
 
 document.getElementById('i18n_LABEL_POPUPMENU_PLAY').innerText = __.trans('MEDIA_CONTROL_PLAY_PAUSE');
 document.getElementById('i18n_LABEL_POPUPMENU_NEXT').innerText = __.trans('MEDIA_CONTROL_NEXT');

@@ -1,6 +1,6 @@
 const { ipcRenderer } = require('electron');
 const request = require('request');
-const __ = require('./translateProvider');
+const __ = require('./translate-provider');
 const url ='https://api.vagalume.com.br/search.php';
 const elementLyric = document.getElementById('lyric');
 const elementDivSearchLyric = document.getElementById('div_search_lyric');

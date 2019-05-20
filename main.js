@@ -2,8 +2,8 @@ const {app, BrowserWindow, BrowserView, globalShortcut, Menu, ipcMain: ipc, syst
 const path = require('path');
 const electronStore = require('electron-store');
 const store = new electronStore();
-const discordRPC = require('./discordRpcProvider');
-const __ = require('./translateProvider');
+const discordRPC = require('./discord-provider');
+const __ = require('./translate-provider');
 const paths = require('./paths.js');
 
 global.sharedObj = {title: 'N/A', paused: true}
@@ -111,8 +111,6 @@ function createWindow() {
             }
         `);
     });
-
-    view.webContents.openDevTools();
 
     view.webContents.on('media-started-playing', function () {
         if (process.platform === 'darwin') {
@@ -369,9 +367,9 @@ function menuBar () {
     Menu.setApplicationMenu(process.platform === 'darwin' ? menu : null); 
 }
 
-const mediaControl = require('./mediaProvider');
+const mediaControl = require('./media-provider');
 const tray = require('./tray');
-const analytics = require('./analyticsProvider');
+const analytics = require('./analytics-provider');
 
 analytics.setEvent('main', 'start', 'v' + app.getVersion(), app.getVersion());
 analytics.setEvent('main', 'os', process.platform, process.platform);

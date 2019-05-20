@@ -1,4 +1,4 @@
-const __ = require('./translateProvider');
+const __ = require('./translate-provider');
 const path = require('path');
 
 function mediaPlayPauseTrack(mainWindow) {
@@ -124,5 +124,6 @@ exports.downVote = mediaDownVote;
 
 // For Windows
 exports.createThumbar = createThumbar;
+
 // For Mac
 // exports.createTouchBar = createTouchBar;

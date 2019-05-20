@@ -1,10 +1,10 @@
 const { app, Menu, Tray, BrowserWindow } = require( 'electron' );
 const path = require( 'path' );
-const mediaControl = require( './mediaProvider' );
+const mediaControl = require( './media-provider' );
 const nativeImage = require( 'electron' ).nativeImage;
 const electronStore = require('electron-store');
 const store = new electronStore();
-const __ = require( './translateProvider' );
+const __ = require( './translate-provider' );
 const paths = require('./paths.js');
 
 let tray = null;
