@@ -25,7 +25,7 @@ ipc.on( 'update-status-bar', function (event, arg) {
     if (store.get('app-dark')) {
         ctx.fillStyle = "white";
         icon_set = icons.dark;
-    }else{
+    } else {
         ctx.fillStyle = "black";
         icon_set = icons.bright;
     }
@@ -35,7 +35,7 @@ ipc.on( 'update-status-bar', function (event, arg) {
   
     if (status.paused){
         ctx.drawImage(icon_set.play, 135, 6, 20,20);
-    }else{
+    } else {
         ctx.drawImage(icon_set.pause, 135, 6, 20,20);
     }
     

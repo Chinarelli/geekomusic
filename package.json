@@ -1,6 +1,6 @@
 {
   "name": "geeko-youtube-music",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Geeko Youtube Music",
   "main": "main.js",
   "scripts": {
@@ -32,7 +32,6 @@
     "electron-localshortcut": "^3.1.0",
     "electron-store": "^2.0.0",
     "i18n": "^0.8.3",
-    "materialize-css": "^1.0.0",
     "npx": "^10.2.0",
     "register-scheme": "0.0.2",
     "request": "^2.88.0"

@@ -9,15 +9,11 @@ function getArchive (name) {
 }
 
 const win = {
-    "index": (path.join(__dirname, 'windows/index-win.html')),
-    "lyrics": (path.join(__dirname, 'windows/lyrics-win.html')),
-    "menu": (path.join(__dirname, 'windows/menu-win.html')),
+    "index": (path.join(__dirname, 'windows/index-win.html'))
 }
 
 const mac = {
-    "index": (path.join(__dirname, 'mac/index-mac.html')),
-    "lyrics": (path.join(__dirname, 'mac/lyrics-mac.html')),
-    "menu": (path.join(__dirname, 'mac/menu-mac.html')),
+    "index": (path.join(__dirname, 'mac/index-mac.html'))
 }
 
 exports.get = getArchive;

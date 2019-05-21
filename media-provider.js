@@ -110,11 +110,6 @@ function createThumbar(mainWindow, type, likeStatus) {
     ]);
 }
 
-function createTouchBar(mainWindow) {
-    // TODO: Implement touchbar 
-    // mainWindow.setTouchBar();
-}
-
 exports.playPauseTrack = mediaPlayPauseTrack;
 exports.stopTrack = mediaStopTrack;
 exports.nextTrack = mediaNextTrack;
@@ -122,8 +117,4 @@ exports.previousTrack = mediaPreviousTrack;
 exports.upVote = mediaUpVote;
 exports.downVote = mediaDownVote;
 
-// For Windows
 exports.createThumbar = createThumbar;
-
-// For Mac
-// exports.createTouchBar = createTouchBar;

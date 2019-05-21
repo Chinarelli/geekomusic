@@ -5,10 +5,7 @@ html, body {
     overflow: hidden;
     user-select: none;
     color: #AAA;
-}
-
-td.item{
-    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .bar {
@@ -56,25 +53,12 @@ input {
     color: #FFF;
 }
 
-/* tbody, td, th {
-    padding: 10px 5px;
-} */
-
 .btn {
     background-color: #232323 !important;
 }
 
 .btn:hover{
     background-color: #131313 !important;
-}
-
-#lyric {
-    font-size: 130%;
-    text-align: center;
-}
-
-#div_search_lyric {
-    margin-top: 20%;
 }
 
 ::-webkit-scrollbar {

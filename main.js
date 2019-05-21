@@ -62,10 +62,6 @@ function createWindow() {
     setWindowSize(view, mainWindowSize.width, mainWindowSize.height);
 
     mainWindow.loadFile(paths.get("index"));
-    
-    if (store.get('window-url')) {
-        mainWindowUrl = store.get('window-url');
-    }
 
     view.webContents.loadURL(mainWindowUrl);
     mediaControl.createThumbar(mainWindow, 'play', likeStatus);
@@ -221,10 +217,6 @@ function createWindow() {
         mediaControl.nextTrack(view)
     });
 
-    globalShortcut.register('CmdOrCtrl+Shift+L', function() {
-        createLyricsWindow();
-    });
-
     ipc.on('what-is-song-playing-now', function(e, data) {
         e.sender.send('song-playing-now-is', {author: songAuthor, title: songTitle})
     })
@@ -236,17 +228,13 @@ function createWindow() {
     ipc.on ('register-renderer', (event, arg) => {
         rendererStatusBar = event.sender;
         event.sender.send('update-status-bar');
-    })
+    });
 
     ipc.on ('update-tray', () => {
         if (process.platform === "darwin") {
             rendererStatusBar.send('update-status-bar')
-            tray.setShinyTray();
+            // tray.setShinyTray();
         }
-    })
-
-    ipc.on('show-lyrics', function() {
-        createLyricsWindow();
     });
 
     function updateActivity(songTitle, songAuthor) {
@@ -269,11 +257,13 @@ app.on('ready', function() {
     store.set('app-dark', systemPreferences.isDarkMode());
     store.set('app-language', app.getLocale());
 
-    tray.createTray(mainWindow, icon);
+    if (process.platform === 'darwin') {
+        tray.createTray(mainWindow, icon);
 
-    ipc.on ('updated-tray-image', function(event, payload) {
-        tray.updateImage(payload);
-    })
+        ipc.on ('updated-tray-image', function(event, payload) {
+            tray.updateImage(payload);
+        });
+    }
 });
 
 app.on('window-all-closed', function () {
@@ -296,23 +286,6 @@ function setWindowSize(view, width, height) {
     } else {
         view.setBounds({x: 0, y: 30, width: width, height: height - 50});
     }
-}
-
-function createLyricsWindow() {
-    const lyrics = new BrowserWindow({
-        icon: path.join(__dirname, icon),
-        width: 800,
-        height: 800,
-        backgroundColor: '#232323',
-        frame: false,
-        titleBarStyle: 'hidden',
-        fullscreenable: (process.platform === 'darwin' ? false : true),
-        webPreferences: {
-            nodeIntegration: true
-       }
-    });
-
-    lyrics.loadFile(paths.get("lyrics"));
 }
 
 function menuBar () {
@@ -339,14 +312,6 @@ function menuBar () {
         {
             label: __.trans('LABEL_VIEW'),
             submenu: [
-                {
-                    label: __.trans('LABEL_LYRICS'),
-                    accelerator: 'CmdOrCtrl+Shift+L', 
-                    click() {
-                        createLyricsWindow();
-                   }
-                },
-                {type: 'separator'},
                 {label: __.trans('LABEL_RELOAD'), role: 'reload'},
                 {label: __.trans('LABEL_FORCE_RELOAD'), role: 'forcereload'},
             ]
