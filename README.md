@@ -2,8 +2,7 @@
 
 Geeko Youtube Music is an unofficial electron desktop application for YouTube Music, with media key support.
 
-- [X] Improve Windows bar
-- [X] Improve OSX bar
+- [X] Improve Windows and OSX bar
 - [X] Remove unused libs
 - [X] Change OSX tray icon
 - [X] Improve file names
@@ -12,6 +11,8 @@ Geeko Youtube Music is an unofficial electron desktop application for YouTube Mu
 - [X] Remove materializecss
 - [X] Remove window-url from storage
 - [X] Add session
+- [ ] Add native menu on windows
+- [ ] Improve package.json scripts
 
 ## Getting Started
 
