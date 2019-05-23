@@ -1,5 +1,3 @@
-const electronStore = require('electron-store');
-const store = new electronStore();
 const DiscordRPC = require('discord-rpc');
 const startTimestamp = new Date();
 const clientId = '575444374268149763';

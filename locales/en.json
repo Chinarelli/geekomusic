@@ -25,7 +25,6 @@
 
     "LABEL_RELOAD": "Reload",
     "LABEL_FORCE_RELOAD": "Force Reload",
-    "LABEL_PREFERENCES": "Preferences",
     "LABEL_PLAY_MUSIC": "Play music",
     "LABEL_LOADING": "Loading...",
     "LABEL_EXIT": "Exit",

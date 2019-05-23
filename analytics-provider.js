@@ -1,11 +1,11 @@
-const { app } = require( 'electron' );
-const Analytics  = require( 'electron-google-analytics' );
-const analytics = new Analytics.default( 'UA-73161831-2' );
-const uuid = require( 'uuid/v4' );
-const electronStore = require( 'electron-store' );
+const {app} = require('electron');
+const Analytics  = require('electron-google-analytics');
+const analytics = new Analytics.default('UA-73161831-2');
+const uuid = require('uuid/v4');
+const electronStore = require('electron-store');
 const store = new electronStore();
 
-let userId = store.get( 'uuid' );
+let userId = store.get('uuid');
 
 if (userId == undefined) {
     userId = uuid();

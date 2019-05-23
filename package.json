@@ -1,6 +1,6 @@
 {
-  "name": "geeko-youtube-music",
-  "version": "1.0.7",
+  "name": "geeko",
+  "version": "1.0.8",
   "description": "Geeko Youtube Music",
   "main": "main.js",
   "scripts": {
@@ -9,7 +9,10 @@
     "dist": "npx electron-builder",
     "publish:win": "build --win -p always --config electron-builder.yml",
     "publish:mac": "build --mac -p always --config electron-builder.yml",
-    "publish:lin": "build --linux -p always --config electron-builder.yml"
+    "publish:lin": "build --linux -p always --config electron-builder.yml",
+
+    "package-mac": "electron-packager . --overwrite --asar=true --platform=darwin --arch=x64 --icon=assets/favicon.icns --prune=true --out=release-builds --darwinDarkModeSupport=true",
+    "package-win": "electron-packager . --overwrite --asar=true --platform=win32 --arch=x64 --icon=assets/favicon.ico --prune=true --out=release-builds"
   },
   "repository": "https://github.com/xxgicoxx/geekomusic",
   "keywords": [
@@ -24,6 +27,7 @@
     "electron-builder": "^20.39.0"
   },
   "dependencies": {
+    "electron-packager": "^12.2.0",
     "custom-electron-titlebar": "^3.0.8",
     "discord-rpc": "^3.0.1",
     "electron-canvas-to-buffer": "^2.0.0",

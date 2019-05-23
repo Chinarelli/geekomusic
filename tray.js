@@ -1,9 +1,7 @@
-const { app, Menu, Tray, BrowserWindow } = require( 'electron' );
-const path = require( 'path' );
-const mediaControl = require( './media-provider' );
-const nativeImage = require( 'electron' ).nativeImage;
-const __ = require( './translate-provider' );
-const paths = require('./paths.js');
+const {app, Menu, Tray} = require('electron');
+const mediaControl = require('./media-provider');
+const nativeImage = require('electron').nativeImage;
+const __ = require('./translate-provider');
 
 let tray = null;
 let saved_mainWindow = null;
@@ -12,7 +10,7 @@ let init_tray = () => {
   const contextMenu = Menu.buildFromTemplate(
       [
           { 
-            label: __.trans( 'MEDIA_CONTROL_PLAY_PAUSE' ), 
+            label: __.trans('MEDIA_CONTROL_PLAY_PAUSE'), 
             type: 'normal', 
             click: function() {
               mediaControl.playPauseTrack(saved_mainWindow.getBrowserView()) 
@@ -20,63 +18,60 @@ let init_tray = () => {
           },
           { type: 'separator' },
           {
-            label: __.trans( 'MEDIA_CONTROL_PREVIOUS' ), 
+            label: __.trans('MEDIA_CONTROL_PREVIOUS'), 
             type: 'normal', 
             click: function() { 
               mediaControl.previousTrack(saved_mainWindow.getBrowserView()) 
             }
           },
           { 
-            label: __.trans( 'MEDIA_CONTROL_NEXT' ), 
+            label: __.trans('MEDIA_CONTROL_NEXT'), 
             type: 'normal', 
             click: function() { 
-              mediaControl.nextTrack( saved_mainWindow.getBrowserView() ) 
+              mediaControl.nextTrack(saved_mainWindow.getBrowserView()) 
             } 
           },
           { type: 'separator' },
           { 
-            label: __.trans( 'MEDIA_CONTROL_THUMBS_UP' ), 
+            label: __.trans('MEDIA_CONTROL_THUMBS_UP'), 
             type: 'normal', 
             click: function() { 
-              mediaControl.upVote( saved_mainWindow.getBrowserView() ) 
+              mediaControl.upVote(saved_mainWindow.getBrowserView()) 
             } 
           },
           { 
-            label: __.trans( 'MEDIA_CONTROL_THUMBS_DOWN' ), 
+            label: __.trans('MEDIA_CONTROL_THUMBS_DOWN'), 
             type: 'normal', 
             click: function() { 
-              mediaControl.downVote( saved_mainWindow.getBrowserView() ) 
+              mediaControl.downVote(saved_mainWindow.getBrowserView()) 
             } 
           },
           { type: 'separator' },
           { 
-            label: __.trans( 'LABEL_EXIT' ), 
+            label: __.trans('LABEL_EXIT'), 
             type: 'normal', 
             click: function() { 
               app.exit(); 
             }
           }
       ]
-  );
+ );
 
-  tray.setToolTip( 'Geeko YouTube Music' );
-  tray.setContextMenu( contextMenu );
+  tray.setToolTip('Geeko YouTube Music');
+  tray.setContextMenu(contextMenu);
 
-  tray.addListener( 'click', function() {
+  tray.addListener('click', function() {
       saved_mainWindow.isVisible() ? saved_mainWindow.hide() : saved_mainWindow.show();
-  } );
+  });
 
-  tray.addListener( 'balloon-click', function() {
+  tray.addListener('balloon-click', function() {
       saved_mainWindow.isVisible() ? saved_mainWindow.focus() : saved_mainWindow.show();
-  } );
+  });
 }
 
-exports.createTray = function( mainWindow, icon ) {
-    // const saved_icon = path.join( __dirname, icon );
-    // const nativeImageIcon = nativeImage.createFromPath( saved_icon );
-    
+exports.createTray = function(mainWindow, icon) {
     const nativeImageIcon = nativeImage.createFromPath(null);
-    tray = new Tray( nativeImageIcon );
+    tray = new Tray(nativeImageIcon);
   
     saved_mainWindow = mainWindow;
     

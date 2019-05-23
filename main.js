@@ -1,5 +1,4 @@
 const {app, BrowserWindow, BrowserView, globalShortcut, Menu, ipcMain: ipc, systemPreferences} = require('electron');
-const path = require('path');
 const electronStore = require('electron-store');
 const store = new electronStore();
 const discordRPC = require('./discord-provider');
@@ -15,14 +14,16 @@ let mainWindowSize = {width: 1500, height: 800};
 let songTitle;
 let mainWindow;
 let songAuthor;
+let songCover;
 let likeStatus;
 let lastSongTitle;
 let lastSongAuthor;
+let lastSongCover;
 let rendererStatusBar;
 
 if (process.platform == 'win32') {
     icon = 'assets/favicon.ico'
-} else if (process.platform == 'darwin') {
+} else if (process.platform === 'darwin') {
     icon = 'assets/favicon.16x16.png'
 }
 
@@ -43,8 +44,7 @@ function createWindow() {
         minHeight: 600,
         backgroundColor: '#232323',
         show: true,
-        frame: false,
-        titleBarStyle: 'hidden',
+        frame: true,
         fullscreenable: (process.platform === 'darwin' ? false : true),
         webPreferences: {
             nodeIntegration: true
@@ -64,6 +64,7 @@ function createWindow() {
     mainWindow.loadFile(paths.get("index"));
 
     view.webContents.loadURL(mainWindowUrl);
+    
     mediaControl.createThumbar(mainWindow, 'play', likeStatus);
 
     if (windowMaximized) {
@@ -88,7 +89,6 @@ function createWindow() {
     });
 
     view.webContents.on('did-navigate-in-page', function() {
-        store.set('window-url', view.webContents.getURL());
         view.webContents.insertCSS(`
             ::-webkit-scrollbar {
                 width: 8px;
@@ -136,7 +136,12 @@ function createWindow() {
                             lastSongTitle = songTitle;
                             lastSongAuthor = songAuthor;
 
-                            updateActivity(songTitle, songAuthor);
+                            view.webContents.executeJavaScript( `document.getElementsByClassName('image style-scope ytmusic-player-bar')[0].src`, null, function( cover ) {
+                                lastSongCover = songCover;
+                                songCover = cover;
+
+                                updateActivity(songTitle, songAuthor, songCover);
+                            });
                         }
                     }
                 });
@@ -176,13 +181,8 @@ function createWindow() {
     });
 
     mainWindow.on('close', function(e) {
-        if (process.platform === 'darwin') {
-            app.quit();
-            return;
-        } else {
-            e.preventDefault();
-            mainWindow.hide();
-        }
+        app.quit();
+        return;
     });
 
     globalShortcut.register('MediaPlayPause', function() {
@@ -232,19 +232,25 @@ function createWindow() {
 
     ipc.on ('update-tray', () => {
         if (process.platform === "darwin") {
-            rendererStatusBar.send('update-status-bar')
-            // tray.setShinyTray();
+            rendererStatusBar.send('update-status-bar');
         }
     });
 
-    function updateActivity(songTitle, songAuthor) {
+    function updateActivity(songTitle, songAuthor, songCover) {
         let nowPlaying = songTitle + ' - ' + songAuthor;
+        let info = {
+            "title": songTitle,
+            "body": songAuthor,
+            "icon": songCover
+        }
 
         if (process.platform === 'darwin') {
             global.sharedObj.title = nowPlaying;
             rendererStatusBar.send('update-status-bar');
         }
 
+        console.log(info);
+        rendererStatusBar.send('send-notification', info);
         mainWindow.setTitle(nowPlaying);
         discordRPC.activity(songTitle, songAuthor);
     }
@@ -256,6 +262,15 @@ app.on('ready', function() {
 
     store.set('app-dark', systemPreferences.isDarkMode());
     store.set('app-language', app.getLocale());
+
+    if (process.platform === 'darwin') {
+        systemPreferences.subscribeNotification('AppleInterfaceThemeChangedNotification',
+            function theThemeHasChanged () {
+                store.set('app-dark', systemPreferences.isDarkMode());
+                rendererStatusBar.send('update-status-bar');
+            }
+        )
+    }
 
     if (process.platform === 'darwin') {
         tray.createTray(mainWindow, icon);
@@ -281,10 +296,10 @@ app.on('activate', function () {
 });
 
 function setWindowSize(view, width, height) {
-    if (process.platform == 'darwin') {
-        view.setBounds({x: 0, y: 22, width: width, height: height - 20});
+    if (process.platform === 'darwin') {
+        view.setBounds({x: 0, y: 0, width: width, height: height - 20});
     } else {
-        view.setBounds({x: 0, y: 30, width: width, height: height - 50});
+        view.setBounds({x: 0, y: 0, width: width, height: height - 40});
     }
 }
 
