@@ -34,13 +34,13 @@ npm install && npm start
 Windows
 
 ```
-npm run publish:win
+npm run package-win
 ```
 
 OSX
 
 ```
-npm run publish:mac
+npm run package-mac
 ```
 
 ## Built With
