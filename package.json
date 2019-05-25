@@ -1,18 +1,16 @@
 {
   "name": "geeko",
-  "version": "1.0.8",
+  "productName": "Geeko",
+  "version": "1.0.9",
   "description": "Geeko Youtube Music",
   "main": "main.js",
+  "bugs": {
+    "url": "https://github.com/xxgicoxx/geekomusic/issues"
+  },
   "scripts": {
     "start": "electron .",
-    "pack": "npx electron-builder --dir",
-    "dist": "npx electron-builder",
-    "publish:win": "build --win -p always --config electron-builder.yml",
-    "publish:mac": "build --mac -p always --config electron-builder.yml",
-    "publish:lin": "build --linux -p always --config electron-builder.yml",
-
     "package-mac": "electron-packager . --overwrite --asar=true --platform=darwin --arch=x64 --icon=assets/favicon.icns --prune=true --out=release-builds --darwinDarkModeSupport=true",
-    "package-win": "electron-packager . --overwrite --asar=true --platform=win32 --arch=x64 --icon=assets/favicon.ico --prune=true --out=release-builds"
+    "package-win": "electron-packager . --overwrite --platform=win32 --arch=x64 --icon=assets/favicon.ico --prune=true --out=release-builds"
   },
   "repository": "https://github.com/xxgicoxx/geekomusic",
   "keywords": [
@@ -23,21 +21,19 @@
   "author": "Giovani de Oliveira <giovanioliveira@outlook.com.br>",
   "license": "CC0-1.0",
   "devDependencies": {
-    "electron": "^5.0.1",
-    "electron-builder": "^20.39.0"
+    "electron": "^5.0.1"
   },
   "dependencies": {
-    "electron-packager": "^12.2.0",
-    "custom-electron-titlebar": "^3.0.8",
     "discord-rpc": "^3.0.1",
     "electron-canvas-to-buffer": "^2.0.0",
     "electron-google-analytics": "^0.1.0",
     "electron-is-dev": "^1.0.1",
     "electron-localshortcut": "^3.1.0",
+    "electron-packager": "^12.2.0",
     "electron-store": "^2.0.0",
+    "electron-titlebar-windows": "^3.0.0",
     "i18n": "^0.8.3",
     "npx": "^10.2.0",
-    "register-scheme": "0.0.2",
     "request": "^2.88.0"
   }
 }

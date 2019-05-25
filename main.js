@@ -1,9 +1,9 @@
 const {app, BrowserWindow, BrowserView, globalShortcut, Menu, ipcMain: ipc, systemPreferences} = require('electron');
 const electronStore = require('electron-store');
 const store = new electronStore();
-const discordRPC = require('./discord-provider');
-const __ = require('./translate-provider');
-const paths = require('./paths.js');
+const discordRPC = require('./provider-discord');
+const paths = require('./file-path');
+const template = require('./menu-template');
 
 global.sharedObj = {title: 'N/A', paused: true}
 
@@ -65,7 +65,7 @@ function createWindow() {
 
     view.webContents.loadURL(mainWindowUrl);
     
-    mediaControl.createThumbar(mainWindow, 'play', likeStatus);
+    mainWindow.setThumbarButtons(template.thumbar(mainWindow, 'play', likeStatus));
 
     if (windowMaximized) {
         setTimeout(function() {
@@ -85,7 +85,7 @@ function createWindow() {
     });
 
     mainWindow.on('show', function () {
-        mediaControl.createThumbar(mainWindow, 'play', likeStatus);
+        mainWindow.setThumbarButtons(template.thumbar(mainWindow, 'play', likeStatus));
     });
 
     view.webContents.on('did-navigate-in-page', function() {
@@ -119,7 +119,7 @@ function createWindow() {
 
             view.webContents.executeJavaScript(`document.getElementById('like-button-renderer').getAttribute('like-status')`, null, function(data) {
                 likeStatus = data;
-                mediaControl.createThumbar(mainWindow, 'pause', likeStatus);
+                mainWindow.setThumbarButtons(template.thumbar(mainWindow, 'pause', likeStatus));
             });
 
             setTimeout(function() {
@@ -156,7 +156,7 @@ function createWindow() {
                 rendererStatusBar.send('update-status-bar');
             }
             
-            mediaControl.createThumbar(mainWindow, 'play', likeStatus);
+            mainWindow.setThumbarButtons(template.thumbar(mainWindow, 'play', likeStatus));
         } catch {
 
         }
@@ -249,16 +249,16 @@ function createWindow() {
             rendererStatusBar.send('update-status-bar');
         }
 
-        console.log(info);
         rendererStatusBar.send('send-notification', info);
         mainWindow.setTitle(nowPlaying);
         discordRPC.activity(songTitle, songAuthor);
     }
 }
 
+app.setAppUserModelId("app.geeko");
+
 app.on('ready', function() {
     createWindow();
-    menuBar();
 
     store.set('app-dark', systemPreferences.isDarkMode());
     store.set('app-language', app.getLocale());
@@ -279,6 +279,8 @@ app.on('ready', function() {
             tray.updateImage(payload);
         });
     }
+
+    Menu.setApplicationMenu(process.platform === 'darwin' ? Menu.buildFromTemplate(template.menu()) : null); 
 });
 
 app.on('window-all-closed', function () {
@@ -303,53 +305,9 @@ function setWindowSize(view, width, height) {
     }
 }
 
-function menuBar () {
-    var menu = Menu.buildFromTemplate([
-        {
-            label: "Geeko",
-            submenu: [
-                {label: __.trans('LABEL_ABOUT'), role: 'about'},
-                {type: 'separator'},
-                {label: __.trans('LABEL_EXIT'), role: 'quit'}
-            ]
-        },
-        {
-            label: __.trans('LABEL_EDIT'),
-            submenu: [
-              {label: __.trans('LABEL_UNDO'), role: 'undo'},
-              {label: __.trans('LABEL_REDO'), role: 'redo'},
-              {type: 'separator'},
-              {label: __.trans('LABEL_CUT'), role: 'cut'},
-              {label: __.trans('LABEL_COPY'), role: 'copy'},
-              {label: __.trans('LABEL_PASTE'), role: 'paste'}
-            ]
-        },
-        {
-            label: __.trans('LABEL_VIEW'),
-            submenu: [
-                {label: __.trans('LABEL_RELOAD'), role: 'reload'},
-                {label: __.trans('LABEL_FORCE_RELOAD'), role: 'forcereload'},
-            ]
-        },
-        {
-            label: __.trans('LABEL_HELP'), role: 'help',
-            submenu: [
-                {
-                    label: __.trans('LABEL_LEARN_MORE'),
-                    click () { 
-                        require('electron').shell.openExternal('https://github.com/xxgicoxx/geekomusic');
-                    }
-                }
-            ]
-        }
-    ]);
-
-    Menu.setApplicationMenu(process.platform === 'darwin' ? menu : null); 
-}
-
-const mediaControl = require('./media-provider');
-const tray = require('./tray');
-const analytics = require('./analytics-provider');
+const mediaControl = require('./media-control');
+const tray = require('./menu-tray');
+const analytics = require('./provider-analytics');
 
 analytics.setEvent('main', 'start', 'v' + app.getVersion(), app.getVersion());
 analytics.setEvent('main', 'os', process.platform, process.platform);

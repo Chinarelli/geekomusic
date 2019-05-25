@@ -2,19 +2,13 @@ const {remote, ipcRenderer: ipc} = require('electron');
 const electronStore = require('electron-store');
 const store = new electronStore();
 const status = remote.getGlobal('sharedObj');
-const icons = require('./tray-icons');
-// const customTitlebar = require('custom-electron-titlebar');
+const icons = require('./menu-icon');
 const canvas = document.createElement('canvas');
 const ctx = canvas.getContext('2d');
-
 let icon_set = icons.bright;
 
 canvas.height = 32;
 canvas.width = 150;
-
-// new customTitlebar.Titlebar({
-//     backgroundColor: customTitlebar.Color.fromHex('#232323'),
-// });
 
 ipc.send('register-renderer');
 
@@ -28,10 +22,6 @@ ipc.on('send-notification', function (event, info) {
 ipc.on('update-status-bar', function (event, arg) {
     ctx.clearRect(0,0, canvas.width, canvas.height);
     ctx.font = "14px Arial";
-
-    // new Notification("Color Changed", {
-    //     body: """
-    // });
 
     if (store.get('app-dark')) {
         ctx.fillStyle = "white";
