@@ -6,11 +6,6 @@
     "MEDIA_CONTROL_PREVIOUS": "Previous",
     "MEDIA_CONTROL_THUMBS_UP": "Thumbs Up",
     "MEDIA_CONTROL_THUMBS_DOWN": "Thumbs Down",
-    "MEDIA_CONTROL_MUTE_UNMUTE": "Mute / Unmute",
-    "MEDIA_CONTROL_REPEAT": "Repeat",
-    "MEDIA_CONTROL_SHUFFLE": "Shuffle",
-    "MEDIA_CONTROL_SEARCH": "Search",
-    "MEDIA_CONTROL_QUEUE_OPEN_CLOSE": "Open / Close Queue",
 
     "LABEL_FILE": "File",
     "LABEL_HELP": "Help",
@@ -28,21 +23,5 @@
     "LABEL_FORCE_RELOAD": "Force Reload",
     "LABEL_PLAY_MUSIC": "Play music",
     "LABEL_LOADING": "Loading...",
-    "LABEL_EXIT": "Exit",
-
-    "LABEL_SETTINGS_TAB_GENERAL": "General",
-    "LABEL_SETTINGS_TAB_MACOS": "Mac OS",
-    "LABEL_SETTINGS_TAB_MINIPLAYER": "Miniplayer",
-    "LABEL_SETTINGS_TAB_SHORTCUTS": "Shortcuts",
-    "LABEL_SETTINGS_TAB_ABOUT": "About",
-    "LABEL_SETTINGS_TAB_GENERAL_KEEP_BACKGROUND": "Keep Geeko on background when window close",
-    "LABEL_SETTINGS_TAB_GENERAL_SHOW_NOTIFICATIONS": "Show Notifications",
-    "LABEL_SETTINGS_TAB_GENERAL_CONTINUE_WHERE_LEFT_OF": "Continue where you left off",
-    "LABEL_SETTINGS_TAB_GENERAL_DISCORD_RICH_PRESENCE": "Enable Discord Rich Presence Integration",
-    "LABEL_SETTINGS_TAB_GENERAL_PAGE_ZOOM": "Page Zoom",
-    "LABEL_SETTINGS_TAB_GENERAL_SELECT_LANGUAGE": "Language",
-    "LABEL_SETTINGS_TAB_SHORTCUTS_LOCAL": "Local",
-    "LABEL_SETTINGS_TAB_SHORTCUTS_GLOBAL": "Global",
-    "LABEL_SETTINGS_TAB_GENERAL_SHINY_TRAY": "Easy Tray Control(For Mac OS only)",
-    "LABEL_SETTINGS_TAB_GENERAL_SHINY_TRAY_DARK": "Tray Is In Dark Mode?"
+    "LABEL_EXIT": "Exit"
 }
